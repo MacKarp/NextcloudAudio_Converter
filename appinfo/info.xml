@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <id>audio_converter</id>
+    <name>Audio converter</name>
+    <summary>Convert audio within the web interface</summary>
+    <screenshot>https://raw.githubusercontent.com/PaulLereverend/NextcloudVideo_Converter/master/img/appstore.gif</screenshot>
+    <description><![CDATA[Convert audio within the web interface
+
+*  **Features:**
+    * Audio Conversion
+    * Optionally overwrites files
+
+*  **Requirements:**
+    * FFmpeg
+
+*  **Note:**
+    * Does not currently support conversion with encryption enabled
+    * This app is based on PaulLereverend's Video Converter app https://github.com/PaulLereverend/NextcloudVideo_Converter
+
+
+]]></description>
+    <version>0.0.1</version>
+    <licence>agpl</licence>
+    <author mail="karpfly@gmail.com">Maciej Karpiński</author>
+    <namespace>Audio_converter</namespace>
+    <category>multimedia</category>
+    <category>tools</category>
+    <website>https://github.com/MacKarp/NextcloudAudio_Converter</website>
+    <bugs>https://github.com/MacKarp/NextcloudAudio_Converter</bugs>
+    <dependencies>
+        <nextcloud min-version="13" max-version="23"/>
+    </dependencies>
+</info>
+
