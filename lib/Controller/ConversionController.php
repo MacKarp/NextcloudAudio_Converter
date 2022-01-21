@@ -72,7 +72,7 @@ class ConversionController extends Controller {
 			if ($codec != null){
 				switch ($codec) {
 					case 'mp3':
-						$middleArgs = "-acodec libmp3lame -preset ".escapeshellarg($preset). " -strict -2";
+						$middleArgs = "-acodec libmp3lame -strict -2";
 						break;
 				}
 			}

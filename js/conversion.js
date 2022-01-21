@@ -15,7 +15,6 @@ $(document).ready(function () {
                     var output = [a.slice(0, position), b, a.slice(position)].join('');
 
                     var self = this;
-                    var preset = "medium";
                     var priority = "0";
                     var title = "Titre";
                     var acodec = null;
