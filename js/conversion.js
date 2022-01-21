@@ -19,7 +19,6 @@ $(document).ready(function () {
                     var title = "Titre";
                     var acodec = null;
                     var abitrate = null;
-                    var faststart = true;
                     $('body').append(
                         '<div id="linkeditor_overlay" class="oc-dialog-dim"></div>'
                         + '<div id="linkeditor_container" class="oc-dialog" style="position: fixed;">'
@@ -101,9 +100,6 @@ $(document).ready(function () {
                             abitrate = null;
                         }
                     });
-                    document.getElementById("movflags").addEventListener("change", function (element) {
-                        faststart = element.srcElement.checked;
-                    });
                     document.getElementById("linkeditor_overlay").addEventListener("click", function () {
                         close();
                         finished = true;
@@ -122,7 +118,6 @@ $(document).ready(function () {
                                         external: 1,
                                         type: $element.target.id,
                                         priority: priority,
-                                        movflags: faststart,
                                         codec: acodec,
                                         abitrate: abitrate,
                                         mtime: context.fileInfoModel.attributes.mtime,
@@ -134,7 +129,6 @@ $(document).ready(function () {
                                         external: 0,
                                         type: $element.target.id,
                                         priority: priority,
-                                        movflags: faststart,
                                         codec: acodec,
                                         abitrate: abitrate,
                                         shareOwner: context.fileList.dirInfo.shareOwnerId,
@@ -158,7 +152,6 @@ $(document).ready(function () {
                                         document.getElementById("labelBitrate").style.display = "none";
                                         document.getElementById("labelBitrateUnit").style.display = "none";
                                         document.getElementById("labelPriority").style.display = "none";
-                                        document.getElementById("movflags").style.display = "none";
                                         document.getElementById("note").style.display = "none";
                                         document.getElementById("buttons").setAttribute('style', 'display: none !important');
                                     },

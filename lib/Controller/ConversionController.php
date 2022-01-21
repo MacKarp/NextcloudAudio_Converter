@@ -31,12 +31,12 @@ class ConversionController extends Controller {
 	/**
 	* @NoAdminRequired
 	*/
-	public function convertHere($nameOfFile, $directory, $external, $type, $priority, $movflags = false, $codec = null, $abitrate = null, $shareOwner = null, $mtime = 0) {
+	public function convertHere($nameOfFile, $directory, $external, $type, $priority, $codec = null, $abitrate = null, $shareOwner = null, $mtime = 0) {
 		$file = $this->getFile($directory, $nameOfFile);
 		$dir = dirname($file);
 		$response = array();
 		if (file_exists($file)){
-			$cmd = $this->createCmd($file, $type, $priority, $movflags, $codec, $abitrate,);
+			$cmd = $this->createCmd($file, $type, $priority, $codec, $abitrate,);
 			exec($cmd, $output,$return);
 			// if the file is in external storage, and also check if encryption is enabled
 			if($external || \OC::$server->getEncryptionManager()->isEnabled()){
@@ -67,19 +67,15 @@ class ConversionController extends Controller {
 	/**
 	* @NoAdminRequired
 	*/
-	public function createCmd($file, $output, $priority, $movflags, $codec, $abitrate, $scale){
+	public function createCmd($file, $output, $priority, $codec, $abitrate){
 		$middleArgs = "";
 			if ($codec != null){
 				switch ($codec) {
 					case 'mp3':
-						$middleArgs = "-acodec libmp3lame -strict -2";
+						$middleArgs = "-acodec libmp3lame";
 						break;
 				}
 			}
-			if ($movflags) {
-				$middleArgs = $middleArgs." -movflags +faststart ";
-			}
-
 			if ($abitrate != null) {
 				switch ($abitrate) {
 					case '1':
