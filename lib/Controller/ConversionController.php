@@ -37,7 +37,7 @@ class ConversionController extends Controller {
 		$response = array();
 		if (file_exists($file)){
 			$cmd = $this->createCmd($file, $type, $priority, $codec, $abitrate,);
-			$test_print = "echo ".$cmd;
+			$test_print = "echo ".$cmd." ->/dev/stderr";
 			exec($test_print);
 			exec($cmd, $output,$return);
 			// if the file is in external storage, and also check if encryption is enabled
