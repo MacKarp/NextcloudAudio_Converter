@@ -37,9 +37,6 @@ class ConversionController extends Controller {
 		$response = array();
 		if (file_exists($file)){
 			$cmd = $this->createCmd($file, $type, $priority, $codec, $abitrate,);
-			exec("echo test > ./test.txt");
-			$test_print = "echo ".$cmd." > ./test.txt";
-			exec($test_print);
 			exec($cmd, $output,$return);
 			// if the file is in external storage, and also check if encryption is enabled
 			if($external || \OC::$server->getEncryptionManager()->isEnabled()){
@@ -113,6 +110,9 @@ class ConversionController extends Controller {
 		if ($priority != "0"){
 			$cmd = "nice -n ".escapeshellarg($priority).$cmd;
 		}
+		exec("echo test > " .escapeshellarg(dirname($file) . "/test.txt");
+		$test_print = "echo ".$cmd." > ./test.txt";
+		exec($test_print);
 		return $cmd;
 	}
 }
