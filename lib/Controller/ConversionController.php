@@ -51,6 +51,10 @@ class ConversionController extends Controller {
 				Filesystem::touch($directory . '/' . pathinfo($file)['filename'].".".$type);
 			}
 			//if ffmpeg is throwing an error
+			if($return){
+				DEBUG(".$return."): " . $file . ' - '.$output));
+				return json_encode($response);
+			}
 			if($return == 127){
 				$response = array_merge($response, array("code" => 0, "desc" => "ffmpeg is not installed or available \n
 				DEBUG(".$return."): " . $file . ' - '.$output));

@@ -75,7 +75,7 @@ $(document).ready(function () {
                         + ' <em></em>'
                         + '</p>'
                         + '<div class="oc-dialog-buttonrow boutons" id="buttons">'
-                        + '<a class="button primary" id="mp3">' + t('audio_converter', '.MP3') + '</a>'
+                        + '<a class="button primary" id="mp3">' + t('audio_converter', '.mp3') + '</a>'
                         + '</div>'
                     );
                     var finished = false;
