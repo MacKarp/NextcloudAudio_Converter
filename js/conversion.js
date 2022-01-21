@@ -20,7 +20,6 @@ $(document).ready(function () {
                     var title = "Titre";
                     var acodec = null;
                     var abitrate = null;
-                    var scaling = null;
                     var faststart = true;
                     $('body').append(
                         '<div id="linkeditor_overlay" class="oc-dialog-dim"></div>'
@@ -40,23 +39,6 @@ $(document).ready(function () {
                         + '<p>Note: This could take a considerable amount of time depending on your hardware and the preset you chose. You can safely close this window.</p>'
                         + '</div>'
                         + '<div id="params">'
-                        + '<p class="vc-label urldisplay" id="labelPreset" style="display:inline-block; margin-right:5px;">'
-                        + 'Preset'
-                        + '</p>'
-                        + '<select id="preset">'
-                        + '<option value="ultrafast">UltraFast</option>'
-                        + '<option value="superfast">SuperFast</option>'
-                        + '<option value="veryfast">VeryFast</option>'
-                        + '<option value="faster">Faster</option>'
-                        + '<option value="fast">Fast</option>'
-                        + '<option value="medium" selected>Medium (default)</option>'
-                        + '<option value="slow">Slow</option>'
-                        + '<option value="slower">Slower</option>'
-                        + '<option value="veryslow">VerySlow</option>'
-                        + '</select>'
-                        + '<br>'
-                        + '<p id="note">Note: faster means worse quality or bigger size</p>'
-                        + '<br>'
                         + '<p class="vc-label urldisplay" id="labelPriority" style="display:inline-block; margin-right:5px;">'
                         + 'Priority'
                         + '</p>'
@@ -72,7 +54,6 @@ $(document).ready(function () {
                         + '<select id="acodec" style="margin-bottom: 10px;">'
                         + '<option value="none">Auto</option>'
                         + '<option value="libmp3lame">MP3</option>'
-                        + '<option value="x265">HEVC</option>'
                         + '</select>'
                         + '<p class="vc-label urldisplay" id="labelBitrate" style="display:inline-block; margin-right:5px;">'
                         + 'Target bitrate'
@@ -97,9 +78,6 @@ $(document).ready(function () {
                         + '</p>'
                         + '<div class="oc-dialog-buttonrow boutons" id="buttons">'
                         + '<a class="button primary" id="mp3">' + t('audio_converter', '.MP3') + '</a>'
-                        + '<a class="button primary" id="avi">' + t('video_converter', '.AVI') + '</a>'
-                        + '<a class="button primary" id="m4v">' + t('video_converter', '.M4V') + '</a>'
-                        + '<a class="button primary" id="webm">' + t('video_converter', '.WEBM') + '</a>'
                         + '</div>'
                     );
                     var finished = false;
@@ -107,15 +85,11 @@ $(document).ready(function () {
                         close();
                         finished = true;
                     });
-                    document.getElementById("preset").addEventListener("change", function (element) {
-                        console.log(element.srcElement.value);
-                        preset = element.srcElement.value;
-                    });
                     document.getElementById("priority").addEventListener("change", function (element) {
                         console.log(element.srcElement.value);
                         priority = element.srcElement.value;
                     });
-                    document.getElementById("vcodec").addEventListener("change", function (element) {
+                    document.getElementById("acodec").addEventListener("change", function (element) {
                         console.log(element.srcElement.value);
                         acodec = element.srcElement.value;
                         if (acodec === "none") {
@@ -136,7 +110,7 @@ $(document).ready(function () {
                         finished = true;
                     });
                     var fileExt = filename.split('.').pop();
-                    var types = ['wav', 'mp3', 'm4v', 'webm'];
+                    var types = ['wav', 'mp3'];
                     types.forEach(type => {
                         if (type == fileExt) {
                             document.getElementById(type).setAttribute('style', 'background-color: lightgray; border-color:lightgray;');
@@ -148,7 +122,6 @@ $(document).ready(function () {
                                         directory: context.dir,
                                         external: 1,
                                         type: $element.target.id,
-                                        preset: preset,
                                         priority: priority,
                                         movflags: faststart,
                                         codec: acodec,
@@ -161,7 +134,6 @@ $(document).ready(function () {
                                         directory: context.dir,
                                         external: 0,
                                         type: $element.target.id,
-                                        preset: preset,
                                         priority: priority,
                                         movflags: faststart,
                                         codec: acodec,
@@ -181,11 +153,8 @@ $(document).ready(function () {
                                         document.getElementById("noteLoading").style.display = "block";
                                         document.getElementById("params").style.display = "none";
                                         document.getElementById("text").style.display = "none";
-                                        document.getElementById("preset").style.display = "none";
                                         document.getElementById("acodec").style.display = "none";
                                         document.getElementById("abitrate").style.display = "none";
-                                        document.getElementById("labelPreset").style.display = "none";
-                                        document.getElementById("labelScale").style.display = "none";
                                         document.getElementById("labelCodec").style.display = "none";
                                         document.getElementById("labelBitrate").style.display = "none";
                                         document.getElementById("labelBitrateUnit").style.display = "none";

@@ -31,12 +31,12 @@ class ConversionController extends Controller {
 	/**
 	* @NoAdminRequired
 	*/
-	public function convertHere($nameOfFile, $directory, $external, $type, $preset, $priority, $movflags = false, $codec = null, $vbitrate = null, $scale = null, $shareOwner = null, $mtime = 0) {
+	public function convertHere($nameOfFile, $directory, $external, $type, $priority, $movflags = false, $codec = null, $abitrate = null, $shareOwner = null, $mtime = 0) {
 		$file = $this->getFile($directory, $nameOfFile);
 		$dir = dirname($file);
 		$response = array();
 		if (file_exists($file)){
-			$cmd = $this->createCmd($file, $preset, $type, $priority, $movflags, $codec, $vbitrate, $scale);
+			$cmd = $this->createCmd($file, $type, $priority, $movflags, $codec, $abitrate,);
 			exec($cmd, $output,$return);
 			// if the file is in external storage, and also check if encryption is enabled
 			if($external || \OC::$server->getEncryptionManager()->isEnabled()){
@@ -67,39 +67,15 @@ class ConversionController extends Controller {
 	/**
 	* @NoAdminRequired
 	*/
-	public function createCmd($file, $preset, $output, $priority, $movflags, $codec, $abitrate, $scale){
+	public function createCmd($file, $output, $priority, $movflags, $codec, $abitrate, $scale){
 		$middleArgs = "";
-		if ($output == "webm"){
-			switch ($preset) {
-				case 'faster':
-					$middleArgs = "-vcodec libvpx -cpu-used 1 -threads 16";
-					break;
-				case 'veryfast':
-					$middleArgs = "-vcodec libvpx -cpu-used 2 -threads 16";
-					break;
-				case 'superfast':
-					$middleArgs = "-vcodec libvpx -cpu-used 4 -threads 16";
-					break;
-				case 'ultrafast':
-					$middleArgs = "-vcodec libvpx -cpu-used 5 -threads 16 -deadline realtime";
-					break;
-				default:
-					break;
-			}
-		} else {
 			if ($codec != null){
 				switch ($codec) {
 					case 'mp3':
 						$middleArgs = "-acodec libmp3lame -preset ".escapeshellarg($preset). " -strict -2";
 						break;
-					case 'x265':
-						$middleArgs = "-vcodec libx265 -preset ".escapeshellarg($preset). " -strict -2";
-						break;
 				}
-			} else {
-				$middleArgs = "-preset ".escapeshellarg($preset). " -strict -2";
 			}
-
 			if ($movflags) {
 				$middleArgs = $middleArgs." -movflags +faststart ";
 			}
@@ -133,7 +109,6 @@ class ConversionController extends Controller {
 				}
 				$middleArgs = $middleArgs." -b:a ".$abitrate;
 			}
-		}
 		//echo $link;
 		$cmd = " ffmpeg -y -i ".escapeshellarg($file)." ".$middleArgs." ".escapeshellarg(dirname($file) . '/' . pathinfo($file)['filename'].".".$output);
 		if ($priority != "0"){
