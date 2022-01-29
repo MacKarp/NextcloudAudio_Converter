@@ -31,12 +31,9 @@ $(document).ready(function () {
                         + '</h2>'
                         + '<div class="sk-circle" style="display:none" id="loading"><div class="sk-circle1 sk-child"></div><div class="sk-circle2 sk-child"></div><div class="sk-circle3 sk-child"></div><div class="sk-circle4 sk-child"></div><div class="sk-circle5 sk-child"></div><div class="sk-circle6 sk-child"></div><div class="sk-circle7 sk-child"></div><div class="sk-circle8 sk-child"></div><div class="sk-circle9 sk-child"></div><div class="sk-circle10 sk-child"></div><div class="sk-circle11 sk-child"></div><div class="sk-circle12 sk-child"></div></div>'
                         + '<div style="text-align:center; display:none; margin-top: 10px;" id="noteLoading">'
-                        + '<p>Note: This could take a considerable amount of time depending on your hardware and the preset you chose. You can safely close this window.</p>'
+                        + '<p>Note: This could take a considerable amount of time depending on your hardware and the codec you chose. You can safely close this window.</p>'
                         + '</div>'
                         + '<div id="params">'
-                        + '<p id="note">TEST Version 0.20</p>'
-                        + '</p>'
-                        + '<br>'
                         + '<div class="checkbox-container">'
                         + '</div></div>'
                         + '<p class="vc-label urldisplay" id="text" style="display: inline; margin-right: 10px;">'
@@ -46,8 +43,8 @@ $(document).ready(function () {
                         + '<div class="oc-dialog-buttonrow boutons" id="buttons">'
                         + '<a class="button primary" id="mp3">' + t('audio_converter', '.MP3') + '</a>'
                         + '<a class="button primary" id="ogg">' + t('audio_converter', '.OGG') + '</a>'
-                        + '<a class="button primary" id="m4v">' + t('audio_converter', '.M4V') + '</a>'
-                        + '<a class="button primary" id="webm">' + t('audio_converter', '.WEBM') + '</a>'
+                        + '<a class="button primary" id="m4a">' + t('audio_converter', '.M4A') + '</a>'
+                        + '<a class="button primary" id="wav">' + t('audio_converter', '.WAV') + '</a>'
                         + '</div>'
                     );
                     var finished = false;
@@ -60,7 +57,7 @@ $(document).ready(function () {
                         finished = true;
                     });
                     var fileExt = filename.split('.').pop();
-                    var types = ['ogg', 'mp3', 'm4v', 'webm'];
+                    var types = ['ogg', 'mp3', 'm4a', 'wav'];
                     types.forEach(type => {
                         if (type == fileExt) {
                             document.getElementById(type).setAttribute('style', 'background-color: lightgray; border-color:lightgray;');
