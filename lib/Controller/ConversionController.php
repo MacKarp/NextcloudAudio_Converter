@@ -82,6 +82,11 @@ class ConversionController extends Controller
 				case 'mp3':
 					$middleArgs = "-acodec libmp3lame";
 					break;
+				case 'ogg' :
+					$middleArgs = "-acodec libvorbis";
+				default:
+					$middleArgs = "-acodec libmp3lame";
+					break;
 			}
 		}
 		if ($abitrate != null) {
