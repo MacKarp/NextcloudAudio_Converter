@@ -19,7 +19,7 @@ $(document).ready(function () {
                     var priority = "0";
                     var title = "Titre";
                     var acodec = null;
-                    var abitrate = null;
+                    var vbitrate = null;
                     var scaling = null;
                     var faststart = true;
                     $('body').append(
@@ -40,7 +40,22 @@ $(document).ready(function () {
                         + '<p>Note: This could take a considerable amount of time depending on your hardware and the preset you chose. You can safely close this window.</p>'
                         + '</div>'
                         + '<div id="params">'
-                        + '<p id="note">TEST Version 0.2</p>'
+                        + '<p class="vc-label urldisplay" id="labelPreset" style="display:inline-block; margin-right:5px;">'
+                        + 'Preset'
+                        + '</p>'
+                        + '<select id="preset">'
+                        + '<option value="ultrafast">UltraFast</option>'
+                        + '<option value="superfast">SuperFast</option>'
+                        + '<option value="veryfast">VeryFast</option>'
+                        + '<option value="faster">Faster</option>'
+                        + '<option value="fast">Fast</option>'
+                        + '<option value="medium" selected>Medium (default)</option>'
+                        + '<option value="slow">Slow</option>'
+                        + '<option value="slower">Slower</option>'
+                        + '<option value="veryslow">VerySlow</option>'
+                        + '</select>'
+                        + '<br>'
+                        + '<p id="note">TEST Version 0.2  Note: faster means worse quality or bigger size</p>'
                         + '<br>'
                         + '<p class="vc-label urldisplay" id="labelPriority" style="display:inline-block; margin-right:5px;">'
                         + 'Priority'
@@ -55,6 +70,7 @@ $(document).ready(function () {
                         + 'Codec'
                         + '</p>'
                         + '<select id="acodec" style="margin-bottom: 10px;">'
+                        + '<option value="none">Auto</option>'
                         + '<option value="mp3">mp3</option>'
                         + '<option value="x265">HEVC</option>'
                         + '</select>'
@@ -63,21 +79,40 @@ $(document).ready(function () {
                         + '</p>'
                         + '<select id="vbitrate" style="margin-bottom: 10px;">'
                         + '<option value="none">Auto</option>'
-                        + '<option value="1">96</option>'
-                        + '<option value="2">128</option>'
-                        + '<option value="3">160</option>'
-                        + '<option value="4">192</option>'
-                        + '<option value="5">224</option>'
-                        + '<option value="6">256</option>'
-                        + '<option value="7">320</option>'
+                        + '<option value="1">1k</option>'
+                        + '<option value="2">2k</option>'
+                        + '<option value="3">3k</option>'
+                        + '<option value="4">4k</option>'
+                        + '<option value="5">5k</option>'
+                        + '<option value="6">6k</option>'
+                        + '<option value="7">7k</option>'
                         + '</select>'
                         + '<p class="vc-label urldisplay" id="labelBitrateUnit" style="display:inline-block; margin-right:5px;">'
                         + 'kbit/s'
                         + '</p>'
                         + '<br>'
+                        + '<p class="vc-label urldisplay" id="labelScale" style="display:inline-block; margin-right:5px;">'
+                        + 'Scale to'
+                        + '</p>'
+                        + '<select id="scale" style="margin-bottom: 10px;">'
+                        + '<option value="none">Keep</option>'
+                        + '<option value="vga">VGA (640x480)</option>'
+                        + '<option value="wxga">WXGA (1280x720)</option>'
+                        + '<option value="hd">HD (1368x768)</option>'
+                        + '<option value="fhd">FHD (1920x1080)</option>'
+                        + '<option value="uhd">4K (3840x2160)</option>'
+                        + '<option value="320">Keep aspect 320 (Wx320)</option>'
+                        + '<option value="480">Keep aspect 480 (Wx480)</option>'
+                        + '<option value="600">Keep aspect 600 (Wx600)</option>'
+                        + '<option value="720">Keep aspect 720 (Wx720)</option>'
+                        + '<option value="1080">Keep aspect 1080 (Wx1080)</option>'
+                        + '</select><br>'
                         + '<div class="checkbox-container">'
+                        + '<label class="vc-label" for="movflags">Faststart option (for MP4)</label>'
+                        + '<input type="checkbox" id="movflags" name="faststart" checked>'
+                        + '</div></div>'
                         + '<p class="vc-label urldisplay" id="text" style="display: inline; margin-right: 10px;">'
-                        + t('audio_converter', 'Choose the output format:')
+                        + t('video_converter', 'Choose the output format:')
                         + ' <em></em>'
                         + '</p>'
                         + '<div class="oc-dialog-buttonrow boutons" id="buttons">'
@@ -92,6 +127,10 @@ $(document).ready(function () {
                         close();
                         finished = true;
                     });
+                    document.getElementById("preset").addEventListener("change", function (element) {
+                        console.log(element.srcElement.value);
+                        preset = element.srcElement.value;
+                    });
                     document.getElementById("priority").addEventListener("change", function (element) {
                         console.log(element.srcElement.value);
                         priority = element.srcElement.value;
@@ -103,13 +142,21 @@ $(document).ready(function () {
                             acodec = null;
                         }
                     });
-                    document.getElementById("abitrate").addEventListener("change", function (element) {
-                        abitrate = element.srcElement.value;
-                        if (abitrate === "none") {
-                            abitrate = null;
+                    document.getElementById("vbitrate").addEventListener("change", function (element) {
+                        vbitrate = element.srcElement.value;
+                        if (vbitrate === "none") {
+                            vbitrate = null;
                         }
                     });
-                    
+                    document.getElementById("scale").addEventListener("change", function (element) {
+                        scaling = element.srcElement.value;
+                        if (scaling === "none") {
+                            scaling = null;
+                        }
+                    });
+                    document.getElementById("movflags").addEventListener("change", function (element) {
+                        faststart = element.srcElement.checked;
+                    });
                     document.getElementById("linkeditor_overlay").addEventListener("click", function () {
                         close();
                         finished = true;
@@ -131,7 +178,7 @@ $(document).ready(function () {
                                         priority: priority,
                                         movflags: faststart,
                                         codec: acodec,
-                                        abitrate: abitrate,
+                                        vbitrate: vbitrate,
                                         scale: scaling,
                                         mtime: context.fileInfoModel.attributes.mtime,
                                     };
@@ -145,7 +192,7 @@ $(document).ready(function () {
                                         priority: priority,
                                         movflags: faststart,
                                         codec: acodec,
-                                        abitrate: abitrate,
+                                        vbitrate: vbitrate,
                                         scale: scaling,
                                         shareOwner: context.fileList.dirInfo.shareOwnerId,
                                     };
@@ -155,7 +202,7 @@ $(document).ready(function () {
                                 $.ajax({
                                     type: "POST",
                                     async: "true",
-                                    url: OC.filePath('audio_converter', 'ajax', 'convertHere.php'),
+                                    url: OC.filePath('video_converter', 'ajax', 'convertHere.php'),
                                     data: data,
                                     beforeSend: function () {
                                         document.getElementById("loading").style.display = "block";
@@ -164,7 +211,7 @@ $(document).ready(function () {
                                         document.getElementById("text").style.display = "none";
                                         document.getElementById("preset").style.display = "none";
                                         document.getElementById("acodec").style.display = "none";
-                                        document.getElementById("abitrate").style.display = "none";
+                                        document.getElementById("vbitrate").style.display = "none";
                                         document.getElementById("scale").style.display = "none";
                                         document.getElementById("labelPreset").style.display = "none";
                                         document.getElementById("labelScale").style.display = "none";
