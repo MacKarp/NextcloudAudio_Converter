@@ -20,6 +20,7 @@ $(document).ready(function () {
                     var acodec = null;
                     var abitrate = null;
                     var scaling = null;
+                    var faststart = true;
                     $('body').append(
                         '<div id="linkeditor_overlay" class="oc-dialog-dim"></div>'
                         + '<div id="linkeditor_container" class="oc-dialog" style="position: fixed;">'
@@ -38,7 +39,7 @@ $(document).ready(function () {
                         + '<p>Note: This could take a considerable amount of time depending on your hardware and the preset you chose. You can safely close this window.</p>'
                         + '</div>'
                         + '<div id="params">'
-                        + '<p id="note">TEST Version 0.9  Note: faster means worse quality or bigger size</p>'
+                        + '<p id="note">TEST Version 0.10  Note: faster means worse quality or bigger size</p>'
                         + '<br>'
                         + '<p class="vc-label urldisplay" id="labelPriority" style="display:inline-block; margin-right:5px;">'
                         + 'Priority'
@@ -75,6 +76,8 @@ $(document).ready(function () {
                         + '</p>'
                         + '<br>'
                         + '<div class="checkbox-container">'
+                        + '<label class="vc-label" for="movflags">Faststart option (for MP4)</label>'
+                        + '<input type="checkbox" id="movflags" name="faststart" checked>'
                         + '</div></div>'
                         + '<p class="vc-label urldisplay" id="text" style="display: inline; margin-right: 10px;">'
                         + t('video_converter', 'Choose the output format:')
@@ -115,6 +118,9 @@ $(document).ready(function () {
                             scaling = null;
                         }
                     });
+                    document.getElementById("movflags").addEventListener("change", function (element) {
+                        faststart = element.srcElement.checked;
+                    });
                     document.getElementById("linkeditor_overlay").addEventListener("click", function () {
                         close();
                         finished = true;
@@ -133,6 +139,7 @@ $(document).ready(function () {
                                         external: 1,
                                         type: $element.target.id,
                                         priority: priority,
+                                        movflags: faststart,
                                         codec: acodec,
                                         abitrate: abitrate,
                                         mtime: context.fileInfoModel.attributes.mtime,
@@ -144,6 +151,7 @@ $(document).ready(function () {
                                         external: 0,
                                         type: $element.target.id,
                                         priority: priority,
+                                        movflags: faststart,
                                         codec: acodec,
                                         abitrate: abitrate,
                                         shareOwner: context.fileList.dirInfo.shareOwnerId,
@@ -167,6 +175,7 @@ $(document).ready(function () {
                                         document.getElementById("labelBitrate").style.display = "none";
                                         document.getElementById("labelBitrateUnit").style.display = "none";
                                         document.getElementById("labelPriority").style.display = "none";
+                                        document.getElementById("movflags").style.display = "none";
                                         document.getElementById("note").style.display = "none";
                                         document.getElementById("buttons").setAttribute('style', 'display: none !important');
                                     },
