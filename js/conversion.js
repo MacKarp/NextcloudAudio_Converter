@@ -37,7 +37,7 @@ $(document).ready(function () {
                         + '<p>Note: This could take a considerable amount of time depending on your hardware and the preset you chose. You can safely close this window.</p>'
                         + '</div>'
                         + '<div id="params">'
-                        + '<p id="note">TEST Version 0.13</p>'
+                        + '<p id="note">TEST Version 0.14</p>'
                         + '<br>'
                         + '<p class="vc-label urldisplay" id="labelPriority" style="display:inline-block; margin-right:5px;">'
                         + 'Priority'
@@ -54,20 +54,20 @@ $(document).ready(function () {
                         + '<select id="acodec" style="margin-bottom: 10px;">'
                         + '<option value="none">Auto</option>'
                         + '<option value="mp3">mp3</option>'
-                        + '<option value="x265">HEVC</option>'
+                        + '<option value="ogg">ogg</option>'
                         + '</select>'
                         + '<p class="vc-label urldisplay" id="labelBitrate" style="display:inline-block; margin-right:5px;">'
                         + 'Target bitrate'
                         + '</p>'
                         + '<select id="abitrate" style="margin-bottom: 10px;">'
                         + '<option value="none">Auto</option>'
-                        + '<option value="1">1k</option>'
-                        + '<option value="2">2k</option>'
-                        + '<option value="3">3k</option>'
-                        + '<option value="4">4k</option>'
-                        + '<option value="5">5k</option>'
-                        + '<option value="6">6k</option>'
-                        + '<option value="7">7k</option>'
+                        + '<option value="1">96</option>'
+                        + '<option value="2">128</option>'
+                        + '<option value="3">160</option>'
+                        + '<option value="4">192</option>'
+                        + '<option value="5">224</option>'
+                        + '<option value="6">256</option>'
+                        + '<option value="7">320</option>'
                         + '</select>'
                         + '<p class="vc-label urldisplay" id="labelBitrateUnit" style="display:inline-block; margin-right:5px;">'
                         + 'kbit/s'
@@ -81,9 +81,7 @@ $(document).ready(function () {
                         + '</p>'
                         + '<div class="oc-dialog-buttonrow boutons" id="buttons">'
                         + '<a class="button primary" id="mp3">' + t('audio_converter', '.MP3') + '</a>'
-                        + '<a class="button primary" id="avi">' + t('audio_converter', '.AVI') + '</a>'
-                        + '<a class="button primary" id="m4v">' + t('audio_converter', '.M4V') + '</a>'
-                        + '<a class="button primary" id="webm">' + t('audio_converter', '.WEBM') + '</a>'
+                        + '<a class="button primary" id="ogg">' + t('audio_converter', '.OGG') + '</a>'
                         + '</div>'
                     );
                     var finished = false;
@@ -147,7 +145,7 @@ $(document).ready(function () {
                                 $.ajax({
                                     type: "POST",
                                     async: "true",
-                                    url: OC.filePath('video_converter', 'ajax', 'convertHere.php'),
+                                    url: OC.filePath('audio_converter', 'ajax', 'convertHere.php'),
                                     data: data,
                                     beforeSend: function () {
                                         document.getElementById("loading").style.display = "block";
