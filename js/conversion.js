@@ -15,7 +15,6 @@ $(document).ready(function () {
                     var output = [a.slice(0, position), b, a.slice(position)].join('');
 
                     var self = this;
-                    var preset = "medium";
                     var priority = "0";
                     var title = "Titre";
                     var acodec = null;
@@ -40,7 +39,7 @@ $(document).ready(function () {
                         + '<p>Note: This could take a considerable amount of time depending on your hardware and the preset you chose. You can safely close this window.</p>'
                         + '</div>'
                         + '<div id="params">'
-                        + '<p id="note">TEST Version 0.4  Note: faster means worse quality or bigger size</p>'
+                        + '<p id="note">TEST Version 0.5  Note: faster means worse quality or bigger size</p>'
                         + '<br>'
                         + '<p class="vc-label urldisplay" id="labelPriority" style="display:inline-block; margin-right:5px;">'
                         + 'Priority'
@@ -112,10 +111,6 @@ $(document).ready(function () {
                         close();
                         finished = true;
                     });
-                    document.getElementById("preset").addEventListener("change", function (element) {
-                        console.log(element.srcElement.value);
-                        preset = element.srcElement.value;
-                    });
                     document.getElementById("priority").addEventListener("change", function (element) {
                         console.log(element.srcElement.value);
                         priority = element.srcElement.value;
@@ -159,7 +154,6 @@ $(document).ready(function () {
                                         directory: context.dir,
                                         external: 1,
                                         type: $element.target.id,
-                                        preset: preset,
                                         priority: priority,
                                         movflags: faststart,
                                         codec: acodec,
@@ -173,7 +167,6 @@ $(document).ready(function () {
                                         directory: context.dir,
                                         external: 0,
                                         type: $element.target.id,
-                                        preset: preset,
                                         priority: priority,
                                         movflags: faststart,
                                         codec: acodec,
@@ -194,11 +187,9 @@ $(document).ready(function () {
                                         document.getElementById("noteLoading").style.display = "block";
                                         document.getElementById("params").style.display = "none";
                                         document.getElementById("text").style.display = "none";
-                                        document.getElementById("preset").style.display = "none";
                                         document.getElementById("acodec").style.display = "none";
                                         document.getElementById("abitrate").style.display = "none";
                                         document.getElementById("scale").style.display = "none";
-                                        document.getElementById("labelPreset").style.display = "none";
                                         document.getElementById("labelScale").style.display = "none";
                                         document.getElementById("labelCodec").style.display = "none";
                                         document.getElementById("labelBitrate").style.display = "none";
