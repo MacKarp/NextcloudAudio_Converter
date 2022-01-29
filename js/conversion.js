@@ -19,7 +19,7 @@ $(document).ready(function () {
                     var priority = "0";
                     var title = "Titre";
                     var acodec = null;
-                    var vbitrate = null;
+                    var abitrate = null;
                     var scaling = null;
                     var faststart = true;
                     $('body').append(
@@ -55,7 +55,7 @@ $(document).ready(function () {
                         + '<option value="veryslow">VerySlow</option>'
                         + '</select>'
                         + '<br>'
-                        + '<p id="note">TEST Version 0.2  Note: faster means worse quality or bigger size</p>'
+                        + '<p id="note">TEST Version 0.3  Note: faster means worse quality or bigger size</p>'
                         + '<br>'
                         + '<p class="vc-label urldisplay" id="labelPriority" style="display:inline-block; margin-right:5px;">'
                         + 'Priority'
@@ -77,7 +77,7 @@ $(document).ready(function () {
                         + '<p class="vc-label urldisplay" id="labelBitrate" style="display:inline-block; margin-right:5px;">'
                         + 'Target bitrate'
                         + '</p>'
-                        + '<select id="vbitrate" style="margin-bottom: 10px;">'
+                        + '<select id="abitrate" style="margin-bottom: 10px;">'
                         + '<option value="none">Auto</option>'
                         + '<option value="1">1k</option>'
                         + '<option value="2">2k</option>'
@@ -142,10 +142,10 @@ $(document).ready(function () {
                             acodec = null;
                         }
                     });
-                    document.getElementById("vbitrate").addEventListener("change", function (element) {
-                        vbitrate = element.srcElement.value;
-                        if (vbitrate === "none") {
-                            vbitrate = null;
+                    document.getElementById("abitrate").addEventListener("change", function (element) {
+                        abitrate = element.srcElement.value;
+                        if (abitrate === "none") {
+                            abitrate = null;
                         }
                     });
                     document.getElementById("scale").addEventListener("change", function (element) {
@@ -178,7 +178,7 @@ $(document).ready(function () {
                                         priority: priority,
                                         movflags: faststart,
                                         codec: acodec,
-                                        vbitrate: vbitrate,
+                                        abitrate: abitrate,
                                         scale: scaling,
                                         mtime: context.fileInfoModel.attributes.mtime,
                                     };
@@ -192,7 +192,7 @@ $(document).ready(function () {
                                         priority: priority,
                                         movflags: faststart,
                                         codec: acodec,
-                                        vbitrate: vbitrate,
+                                        abitrate: abitrate,
                                         scale: scaling,
                                         shareOwner: context.fileList.dirInfo.shareOwnerId,
                                     };
@@ -211,7 +211,7 @@ $(document).ready(function () {
                                         document.getElementById("text").style.display = "none";
                                         document.getElementById("preset").style.display = "none";
                                         document.getElementById("acodec").style.display = "none";
-                                        document.getElementById("vbitrate").style.display = "none";
+                                        document.getElementById("abitrate").style.display = "none";
                                         document.getElementById("scale").style.display = "none";
                                         document.getElementById("labelPreset").style.display = "none";
                                         document.getElementById("labelScale").style.display = "none";
