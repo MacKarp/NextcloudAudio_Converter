@@ -15,9 +15,7 @@ $(document).ready(function () {
                     var output = [a.slice(0, position), b, a.slice(position)].join('');
 
                     var self = this;
-                    var priority = "0";
                     var title = "Titre";
-                    var acodec = null;
                     $('body').append(
                         '<div id="linkeditor_overlay" class="oc-dialog-dim"></div>'
                         + '<div id="linkeditor_container" class="oc-dialog" style="position: fixed;">'
@@ -36,27 +34,7 @@ $(document).ready(function () {
                         + '<p>Note: This could take a considerable amount of time depending on your hardware and the preset you chose. You can safely close this window.</p>'
                         + '</div>'
                         + '<div id="params">'
-                        + '<p id="note">TEST Version 0.18</p>'
-                        + '<br>'
-                        + '<p class="vc-label urldisplay" id="labelPriority" style="display:inline-block; margin-right:5px;">'
-                        + 'Priority'
-                        + '</p>'
-                        + '<select id="priority" style="margin-bottom: 10px;">'
-                        + '<option value="-10">High</option>'
-                        + '<option value="0">Normal (default)</option>'
-                        + '<option value="10" selected>Low</option>'
-                        + '</select>'
-                        + '<br>'
-                        + '<p class="vc-label urldisplay" id="labelCodec" style="display:inline-block; margin-right:5px;">'
-                        + 'Codec'
-                        + '</p>'
-                        + '<select id="acodec" style="margin-bottom: 10px;">'
-                        + '<option value="none">Auto</option>'
-                        + '<option value="mp3">mp3</option>'
-                        + '<option value="ogg">ogg</option>'
-                        + '</select>'
-                        + '<p class="vc-label urldisplay" id="labelBitrateUnit" style="display:inline-block; margin-right:5px;">'
-                        + 'kbit/s'
+                        + '<p id="note">TEST Version 0.20</p>'
                         + '</p>'
                         + '<br>'
                         + '<div class="checkbox-container">'
@@ -76,18 +54,7 @@ $(document).ready(function () {
                     document.getElementById("btnClose").addEventListener("click", function () {
                         close();
                         finished = true;
-                    });
-                    document.getElementById("priority").addEventListener("change", function (element) {
-                        console.log(element.srcElement.value);
-                        priority = element.srcElement.value;
-                    });
-                    document.getElementById("acodec").addEventListener("change", function (element) {
-                        console.log(element.srcElement.value);
-                        acodec = element.srcElement.value;
-                        if (acodec === "none") {
-                            acodec = null;
-                        }
-                    });
+                    });        
                     document.getElementById("linkeditor_overlay").addEventListener("click", function () {
                         close();
                         finished = true;
@@ -105,8 +72,6 @@ $(document).ready(function () {
                                         directory: context.dir,
                                         external: 1,
                                         type: $element.target.id,
-                                        priority: priority,
-                                        codec: acodec,
                                         mtime: context.fileInfoModel.attributes.mtime,
                                     };
                                 } else {
@@ -115,8 +80,6 @@ $(document).ready(function () {
                                         directory: context.dir,
                                         external: 0,
                                         type: $element.target.id,
-                                        priority: priority,
-                                        codec: acodec,
                                         shareOwner: context.fileList.dirInfo.shareOwnerId,
                                     };
                                 }
@@ -132,9 +95,6 @@ $(document).ready(function () {
                                         document.getElementById("noteLoading").style.display = "block";
                                         document.getElementById("params").style.display = "none";
                                         document.getElementById("text").style.display = "none";
-                                        document.getElementById("acodec").style.display = "none";
-                                        document.getElementById("labelCodec").style.display = "none";
-                                        document.getElementById("labelPriority").style.display = "none";
                                         document.getElementById("note").style.display = "none";
                                         document.getElementById("buttons").setAttribute('style', 'display: none !important');
                                     },
