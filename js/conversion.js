@@ -39,7 +39,7 @@ $(document).ready(function () {
                         + '<p>Note: This could take a considerable amount of time depending on your hardware and the preset you chose. You can safely close this window.</p>'
                         + '</div>'
                         + '<div id="params">'
-                        + '<p id="note">TEST Version 0.11  Note: faster means worse quality or bigger size</p>'
+                        + '<p id="note">TEST Version 0.12</p>'
                         + '<br>'
                         + '<p class="vc-label urldisplay" id="labelPriority" style="display:inline-block; margin-right:5px;">'
                         + 'Priority'
@@ -76,8 +76,6 @@ $(document).ready(function () {
                         + '</p>'
                         + '<br>'
                         + '<div class="checkbox-container">'
-                        + '<label class="vc-label" for="movflags">Faststart option (for MP4)</label>'
-                        + '<input type="checkbox" id="movflags" name="faststart" checked>'
                         + '</div></div>'
                         + '<p class="vc-label urldisplay" id="text" style="display: inline; margin-right: 10px;">'
                         + t('video_converter', 'Choose the output format:')
