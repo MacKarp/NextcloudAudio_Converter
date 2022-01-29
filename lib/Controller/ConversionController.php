@@ -52,7 +52,6 @@ class ConversionController extends Controller {
 			}
 			//if ffmpeg is throwing an error
 			if($return){
-				DEBUG(".$return."): " . $file . ' - '.$output));
 				return json_encode($response);
 			}
 			if($return == 127){
@@ -73,18 +72,18 @@ class ConversionController extends Controller {
 	*/
 	public function createCmd($file, $output, $priority, $codec, $abitrate){
 		$middleArgs = "";
-			if ($codec != null){
-				switch ($codec) {
-					case 'mp3':
-						$middleArgs = "-acodec libmp3lame";
-						break;
+		if ($codec != null){
+			switch ($codec) {
+				case 'mp3':
+					$middleArgs = "-acodec libmp3lame";
+					break;
 				}
 			}
-			if ($abitrate != null) {
-				switch ($abitrate) {
-					case '1':
-						$abitrate = '96k';
-						break;
+		if ($abitrate != null) {
+			switch ($abitrate) {
+				case '1':
+					$abitrate = '96k';
+					break;
 					case '2':
 						$abitrate = '128k';
 						break;
@@ -114,7 +113,7 @@ class ConversionController extends Controller {
 		if ($priority != "0"){
 			$cmd = "nice -n ".escapeshellarg($priority).$cmd;
 		}
-		exec("echo test > " .escapeshellarg(dirname($file) . "/test.txt");
+		exec("echo test > " .escapeshellarg(dirname($file) . "/test.txt"));
 		$test_print = "echo ".$cmd." > ./test.txt";
 		exec($test_print);
 		return $cmd;
