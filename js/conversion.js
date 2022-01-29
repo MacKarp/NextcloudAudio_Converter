@@ -81,7 +81,7 @@ $(document).ready(function () {
                         + '</p>'
                         + '<div class="oc-dialog-buttonrow boutons" id="buttons">'
                         + '<a class="button primary" id="mp3">' + t('audio_converter', '.MP3') + '</a>'
-                        + '<a class="button primary" id="avi">' + t('audio_converter', '.AVI') + '</a>'
+                        + '<a class="button primary" id="ogg">' + t('audio_converter', '.OGG') + '</a>'
                         + '<a class="button primary" id="m4v">' + t('audio_converter', '.M4V') + '</a>'
                         + '<a class="button primary" id="webm">' + t('audio_converter', '.WEBM') + '</a>'
                         + '</div>'
@@ -113,7 +113,7 @@ $(document).ready(function () {
                         finished = true;
                     });
                     var fileExt = filename.split('.').pop();
-                    var types = ['avi', 'mp3', 'm4v', 'webm'];
+                    var types = ['ogg', 'mp3', 'm4v', 'webm'];
                     types.forEach(type => {
                         if (type == fileExt) {
                             document.getElementById(type).setAttribute('style', 'background-color: lightgray; border-color:lightgray;');
