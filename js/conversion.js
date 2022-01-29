@@ -39,7 +39,7 @@ $(document).ready(function () {
                         + '<p>Note: This could take a considerable amount of time depending on your hardware and the preset you chose. You can safely close this window.</p>'
                         + '</div>'
                         + '<div id="params">'
-                        + '<p id="note">TEST Version 0.12</p>'
+                        + '<p id="note">TEST Version 0.13</p>'
                         + '<br>'
                         + '<p class="vc-label urldisplay" id="labelPriority" style="display:inline-block; margin-right:5px;">'
                         + 'Priority'
@@ -110,9 +110,6 @@ $(document).ready(function () {
                             abitrate = null;
                         }
                     });
-                    document.getElementById("movflags").addEventListener("change", function (element) {
-                        faststart = element.srcElement.checked;
-                    });
                     document.getElementById("linkeditor_overlay").addEventListener("click", function () {
                         close();
                         finished = true;
@@ -131,7 +128,6 @@ $(document).ready(function () {
                                         external: 1,
                                         type: $element.target.id,
                                         priority: priority,
-                                        movflags: faststart,
                                         codec: acodec,
                                         abitrate: abitrate,
                                         mtime: context.fileInfoModel.attributes.mtime,
@@ -143,7 +139,6 @@ $(document).ready(function () {
                                         external: 0,
                                         type: $element.target.id,
                                         priority: priority,
-                                        movflags: faststart,
                                         codec: acodec,
                                         abitrate: abitrate,
                                         shareOwner: context.fileList.dirInfo.shareOwnerId,
@@ -167,7 +162,6 @@ $(document).ready(function () {
                                         document.getElementById("labelBitrate").style.display = "none";
                                         document.getElementById("labelBitrateUnit").style.display = "none";
                                         document.getElementById("labelPriority").style.display = "none";
-                                        document.getElementById("movflags").style.display = "none";
                                         document.getElementById("note").style.display = "none";
                                         document.getElementById("buttons").setAttribute('style', 'display: none !important');
                                     },
