@@ -31,11 +31,8 @@ $(document).ready(function () {
                         + '</h2>'
                         + '<div class="sk-circle" style="display:none" id="loading"><div class="sk-circle1 sk-child"></div><div class="sk-circle2 sk-child"></div><div class="sk-circle3 sk-child"></div><div class="sk-circle4 sk-child"></div><div class="sk-circle5 sk-child"></div><div class="sk-circle6 sk-child"></div><div class="sk-circle7 sk-child"></div><div class="sk-circle8 sk-child"></div><div class="sk-circle9 sk-child"></div><div class="sk-circle10 sk-child"></div><div class="sk-circle11 sk-child"></div><div class="sk-circle12 sk-child"></div></div>'
                         + '<div style="text-align:center; display:none; margin-top: 10px;" id="noteLoading">'
-                        + '<p>Note: This could take a considerable amount of time depending on your hardware and the codec you chose. You can safely close this window.</p>'
+                        + '<p>Note: This could take a considerable amount of time depending on your hardware and the preset you chose. You can safely close this window.</p>'
                         + '</div>'
-                        + '<div id="params">'
-                        + '<div class="checkbox-container">'
-                        + '</div></div>'
                         + '<p class="vc-label urldisplay" id="text" style="display: inline; margin-right: 10px;">'
                         + t('audio_converter', 'Choose the output format:')
                         + ' <em></em>'
@@ -90,7 +87,6 @@ $(document).ready(function () {
                                     beforeSend: function () {
                                         document.getElementById("loading").style.display = "block";
                                         document.getElementById("noteLoading").style.display = "block";
-                                        document.getElementById("params").style.display = "none";
                                         document.getElementById("text").style.display = "none";
                                         document.getElementById("note").style.display = "none";
                                         document.getElementById("buttons").setAttribute('style', 'display: none !important');
