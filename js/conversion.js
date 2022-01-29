@@ -39,7 +39,7 @@ $(document).ready(function () {
                         + '<p>Note: This could take a considerable amount of time depending on your hardware and the preset you chose. You can safely close this window.</p>'
                         + '</div>'
                         + '<div id="params">'
-                        + '<p id="note">TEST Version 0.10  Note: faster means worse quality or bigger size</p>'
+                        + '<p id="note">TEST Version 0.11  Note: faster means worse quality or bigger size</p>'
                         + '<br>'
                         + '<p class="vc-label urldisplay" id="labelPriority" style="display:inline-block; margin-right:5px;">'
                         + 'Priority'
@@ -110,12 +110,6 @@ $(document).ready(function () {
                         abitrate = element.srcElement.value;
                         if (abitrate === "none") {
                             abitrate = null;
-                        }
-                    });
-                    document.getElementById("scale").addEventListener("change", function (element) {
-                        scaling = element.srcElement.value;
-                        if (scaling === "none") {
-                            scaling = null;
                         }
                     });
                     document.getElementById("movflags").addEventListener("change", function (element) {
