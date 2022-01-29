@@ -34,7 +34,6 @@ $(document).ready(function () {
                         + '<p>Note: This could take a considerable amount of time depending on your hardware and the preset you chose. You can safely close this window.</p>'
                         + '</div>'
                         + '<div id="params">'
-                        + '</p>'
                         + '<br>'
                         + '<div class="checkbox-container">'
                         + '</div></div>'
