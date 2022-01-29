@@ -19,7 +19,6 @@ $(document).ready(function () {
                     var title = "Titre";
                     var acodec = null;
                     var abitrate = null;
-                    var scaling = null;
                     var faststart = true;
                     $('body').append(
                         '<div id="linkeditor_overlay" class="oc-dialog-dim"></div>'
@@ -39,7 +38,7 @@ $(document).ready(function () {
                         + '<p>Note: This could take a considerable amount of time depending on your hardware and the preset you chose. You can safely close this window.</p>'
                         + '</div>'
                         + '<div id="params">'
-                        + '<p id="note">TEST Version 0.5  Note: faster means worse quality or bigger size</p>'
+                        + '<p id="note">TEST Version 0.6  Note: faster means worse quality or bigger size</p>'
                         + '<br>'
                         + '<p class="vc-label urldisplay" id="labelPriority" style="display:inline-block; margin-right:5px;">'
                         + 'Priority'
@@ -75,22 +74,6 @@ $(document).ready(function () {
                         + 'kbit/s'
                         + '</p>'
                         + '<br>'
-                        + '<p class="vc-label urldisplay" id="labelScale" style="display:inline-block; margin-right:5px;">'
-                        + 'Scale to'
-                        + '</p>'
-                        + '<select id="scale" style="margin-bottom: 10px;">'
-                        + '<option value="none">Keep</option>'
-                        + '<option value="vga">VGA (640x480)</option>'
-                        + '<option value="wxga">WXGA (1280x720)</option>'
-                        + '<option value="hd">HD (1368x768)</option>'
-                        + '<option value="fhd">FHD (1920x1080)</option>'
-                        + '<option value="uhd">4K (3840x2160)</option>'
-                        + '<option value="320">Keep aspect 320 (Wx320)</option>'
-                        + '<option value="480">Keep aspect 480 (Wx480)</option>'
-                        + '<option value="600">Keep aspect 600 (Wx600)</option>'
-                        + '<option value="720">Keep aspect 720 (Wx720)</option>'
-                        + '<option value="1080">Keep aspect 1080 (Wx1080)</option>'
-                        + '</select><br>'
                         + '<div class="checkbox-container">'
                         + '<label class="vc-label" for="movflags">Faststart option (for MP4)</label>'
                         + '<input type="checkbox" id="movflags" name="faststart" checked>'
@@ -128,12 +111,6 @@ $(document).ready(function () {
                             abitrate = null;
                         }
                     });
-                    document.getElementById("scale").addEventListener("change", function (element) {
-                        scaling = element.srcElement.value;
-                        if (scaling === "none") {
-                            scaling = null;
-                        }
-                    });
                     document.getElementById("movflags").addEventListener("change", function (element) {
                         faststart = element.srcElement.checked;
                     });
@@ -158,7 +135,6 @@ $(document).ready(function () {
                                         movflags: faststart,
                                         codec: acodec,
                                         abitrate: abitrate,
-                                        scale: scaling,
                                         mtime: context.fileInfoModel.attributes.mtime,
                                     };
                                 } else {
@@ -171,7 +147,6 @@ $(document).ready(function () {
                                         movflags: faststart,
                                         codec: acodec,
                                         abitrate: abitrate,
-                                        scale: scaling,
                                         shareOwner: context.fileList.dirInfo.shareOwnerId,
                                     };
                                 }
@@ -189,8 +164,6 @@ $(document).ready(function () {
                                         document.getElementById("text").style.display = "none";
                                         document.getElementById("acodec").style.display = "none";
                                         document.getElementById("abitrate").style.display = "none";
-                                        document.getElementById("scale").style.display = "none";
-                                        document.getElementById("labelScale").style.display = "none";
                                         document.getElementById("labelCodec").style.display = "none";
                                         document.getElementById("labelBitrate").style.display = "none";
                                         document.getElementById("labelBitrateUnit").style.display = "none";
