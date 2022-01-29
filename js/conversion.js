@@ -37,7 +37,7 @@ $(document).ready(function () {
                         + '</h2>'
                         + '<div class="sk-circle" style="display:none" id="loading"><div class="sk-circle1 sk-child"></div><div class="sk-circle2 sk-child"></div><div class="sk-circle3 sk-child"></div><div class="sk-circle4 sk-child"></div><div class="sk-circle5 sk-child"></div><div class="sk-circle6 sk-child"></div><div class="sk-circle7 sk-child"></div><div class="sk-circle8 sk-child"></div><div class="sk-circle9 sk-child"></div><div class="sk-circle10 sk-child"></div><div class="sk-circle11 sk-child"></div><div class="sk-circle12 sk-child"></div></div>'
                         + '<div style="text-align:center; display:none; margin-top: 10px;" id="noteLoading">'
-                        + '<p>TEST Version 0.1 Note: This could take a considerable amount of time depending on your hardware and the preset you chose. You can safely close this window.</p>'
+                        + '<p>Note: This could take a considerable amount of time depending on your hardware and the preset you chose. You can safely close this window.</p>'
                         + '</div>'
                         + '<div id="params">'
                         + '<p class="vc-label urldisplay" id="labelPreset" style="display:inline-block; margin-right:5px;">'
@@ -55,7 +55,7 @@ $(document).ready(function () {
                         + '<option value="veryslow">VerySlow</option>'
                         + '</select>'
                         + '<br>'
-                        + '<p id="note">Note: faster means worse quality or bigger size</p>'
+                        + '<p id="note">TEST Version 0.1  Note: faster means worse quality or bigger size</p>'
                         + '<br>'
                         + '<p class="vc-label urldisplay" id="labelPriority" style="display:inline-block; margin-right:5px;">'
                         + 'Priority'
@@ -71,7 +71,7 @@ $(document).ready(function () {
                         + '</p>'
                         + '<select id="vcodec" style="margin-bottom: 10px;">'
                         + '<option value="none">Auto</option>'
-                        + '<option value="x264">H264</option>'
+                        + '<option value="mp3">mp3</option>'
                         + '<option value="x265">HEVC</option>'
                         + '</select>'
                         + '<p class="vc-label urldisplay" id="labelBitrate" style="display:inline-block; margin-right:5px;">'
@@ -116,10 +116,10 @@ $(document).ready(function () {
                         + ' <em></em>'
                         + '</p>'
                         + '<div class="oc-dialog-buttonrow boutons" id="buttons">'
-                        + '<a class="button primary" id="mp4">' + t('video_converter', '.MP4') + '</a>'
-                        + '<a class="button primary" id="avi">' + t('video_converter', '.AVI') + '</a>'
-                        + '<a class="button primary" id="m4v">' + t('video_converter', '.M4V') + '</a>'
-                        + '<a class="button primary" id="webm">' + t('video_converter', '.WEBM') + '</a>'
+                        + '<a class="button primary" id="mp3">' + t('audio_converter', '.MP3') + '</a>'
+                        + '<a class="button primary" id="avi">' + t('audio_converter', '.AVI') + '</a>'
+                        + '<a class="button primary" id="m4v">' + t('audio_converter', '.M4V') + '</a>'
+                        + '<a class="button primary" id="webm">' + t('audio_converter', '.WEBM') + '</a>'
                         + '</div>'
                     );
                     var finished = false;
@@ -162,7 +162,7 @@ $(document).ready(function () {
                         finished = true;
                     });
                     var fileExt = filename.split('.').pop();
-                    var types = ['avi', 'mp4', 'm4v', 'webm'];
+                    var types = ['avi', 'mp3', 'm4v', 'webm'];
                     types.forEach(type => {
                         if (type == fileExt) {
                             document.getElementById(type).setAttribute('style', 'background-color: lightgray; border-color:lightgray;');
