@@ -19,6 +19,7 @@ $(document).ready(function () {
                     var title = "Titre";
                     var acodec = null;
                     var abitrate = null;
+                    var scaling = null;
                     $('body').append(
                         '<div id="linkeditor_overlay" class="oc-dialog-dim"></div>'
                         + '<div id="linkeditor_container" class="oc-dialog" style="position: fixed;">'
@@ -37,7 +38,7 @@ $(document).ready(function () {
                         + '<p>Note: This could take a considerable amount of time depending on your hardware and the preset you chose. You can safely close this window.</p>'
                         + '</div>'
                         + '<div id="params">'
-                        + '<p id="note">TEST Version 0.8  Note: faster means worse quality or bigger size</p>'
+                        + '<p id="note">TEST Version 0.9  Note: faster means worse quality or bigger size</p>'
                         + '<br>'
                         + '<p class="vc-label urldisplay" id="labelPriority" style="display:inline-block; margin-right:5px;">'
                         + 'Priority'
@@ -73,6 +74,7 @@ $(document).ready(function () {
                         + 'kbit/s'
                         + '</p>'
                         + '<br>'
+                        + '<div class="checkbox-container">'
                         + '</div></div>'
                         + '<p class="vc-label urldisplay" id="text" style="display: inline; margin-right: 10px;">'
                         + t('video_converter', 'Choose the output format:')
@@ -105,6 +107,12 @@ $(document).ready(function () {
                         abitrate = element.srcElement.value;
                         if (abitrate === "none") {
                             abitrate = null;
+                        }
+                    });
+                    document.getElementById("scale").addEventListener("change", function (element) {
+                        scaling = element.srcElement.value;
+                        if (scaling === "none") {
+                            scaling = null;
                         }
                     });
                     document.getElementById("linkeditor_overlay").addEventListener("click", function () {
@@ -159,7 +167,6 @@ $(document).ready(function () {
                                         document.getElementById("labelBitrate").style.display = "none";
                                         document.getElementById("labelBitrateUnit").style.display = "none";
                                         document.getElementById("labelPriority").style.display = "none";
-                                        document.getElementById("movflags").style.display = "none";
                                         document.getElementById("note").style.display = "none";
                                         document.getElementById("buttons").setAttribute('style', 'display: none !important');
                                     },
