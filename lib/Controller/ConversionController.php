@@ -34,13 +34,13 @@ class ConversionController extends Controller
 	/**
 	 * @NoAdminRequired
 	 */
-	public function convertHere($nameOfFile, $directory, $external, $type, $priority, $codec = null, $abitrate = null, $shareOwner = null, $mtime = 0)
+	public function convertHere($nameOfFile, $directory, $external, $type, $priority, $codec = null, $shareOwner = null, $mtime = 0)
 	{
 		$file = $this->getFile($directory, $nameOfFile);
 		$dir = dirname($file);
 		$response = array();
 		if (file_exists($file)) {
-			$cmd = $this->createCmd($file, $type, $priority, $codec, $abitrate,);
+			$cmd = $this->createCmd($file, $type, $priority, $codec);
 			exec($cmd, $output, $return);
 			// if the file is in external storage, and also check if encryption is enabled
 			if ($external || \OC::$server->getEncryptionManager()->isEnabled()) {
@@ -74,7 +74,7 @@ class ConversionController extends Controller
 	/**
 	 * @NoAdminRequired
 	 */
-	public function createCmd($file, $output, $priority, $codec, $abitrate)
+	public function createCmd($file, $output, $priority, $codec)
 	{
 		$middleArgs = "";
 		if ($codec != null) {
@@ -89,43 +89,11 @@ class ConversionController extends Controller
 					break;
 			}
 		}
-		if ($abitrate != null) {
-			switch ($abitrate) {
-				case '1':
-					$abitrate = '96k';
-					break;
-				case '2':
-					$abitrate = '128k';
-					break;
-				case '3':
-					$abitrate = '160k';
-					break;
-				case '4':
-					$abitrate = '192k';
-					break;
-				case '5':
-					$abitrate = '224k';
-					break;
-				case '6':
-					$abitrate = '256k';
-					break;
-				case '7':
-					$abitrate = '320k';
-					break;
-				default:
-					$abitrate = '320k';
-					break;
-			}
-			$middleArgs = $middleArgs . " -b:a " . $abitrate;
-		}
 		//echo $link;
 		$cmd = " ffmpeg -y -i " . escapeshellarg($file) . " " . $middleArgs . " " . escapeshellarg(dirname($file) . '/' . pathinfo($file)['filename'] . "." . $output);
 		if ($priority != "0") {
 			$cmd = "nice -n " . escapeshellarg($priority) . $cmd;
 		}
-		exec("echo test > " . escapeshellarg(dirname($file) . "/test.txt"));
-		$test_print = "echo " . $cmd . " > ./test.txt";
-		exec($test_print);
 		return $cmd;
 	}
 }
