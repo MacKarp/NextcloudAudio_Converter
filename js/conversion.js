@@ -4,7 +4,7 @@ $(document).ready(function () {
             OCA.Files.fileActions.registerAction({
                 name: 'convert',
                 displayName: 'Convert into',
-                mime: 'video',
+                mime: 'audio',
                 permissions: OC.PERMISSION_UPDATE,
                 type: OCA.Files.FileActions.TYPE_DROPDOWN,
                 iconClass: 'icon-convert',
